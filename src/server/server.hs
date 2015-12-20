@@ -1,14 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
  
-import Data.ByteString.Char8 hiding (getLine, putStrLn)
+import Data.ByteString.Char8 ()
 import System.Exit
 import Network hiding (accept, sClose)
 import Network.Socket hiding (recv)
 import Network.Socket.ByteString (sendAll, recv)
 import Control.Concurrent
  
-main = withSocketsDo $ do
-    --forkIO comandListen
+main :: IO a
+main = withSocketsDo $ do --forkIO comandListen
     sock <- listenOn $ PortNumber 5002
     loop sock
     where
@@ -20,12 +20,13 @@ main = withSocketsDo $ do
                 comandListen
  
 {-# INLINE loop #-}
+loop :: Socket -> IO b
 loop sock = do
    (conn, _) <- accept sock
-   forkIO $ body conn
+   _ <- forkIO $ body conn
    loop sock
    where
-      body c = do 
+      body c = do
               line <- recv c 1024;
               print line
               sendAll c $ line
