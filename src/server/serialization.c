@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (), 
+ *         Author:  Kirill Yartsev 
  *   Organization:  IFMO UNIVERSITY
  *
  * =====================================================================================
@@ -19,14 +19,14 @@
 #include "../include/list_funcs.h"
 #include "../include/serialization.h"
 
-point_t* deserialize (char* lab){
-    point_t* buf;
+labyrinth* deserialize (char* lab){
+    labyrinth* l= (labyrinth*)malloc(sizeof(labyrinth));
 
-    return buf;
+    return l;
 }
 
 char* serialize (point_t* way){
-    char* buf;
+    char* buf = "";
 
     return buf;
 }

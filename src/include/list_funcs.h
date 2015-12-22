@@ -10,7 +10,13 @@ typedef struct point_t {
 	int r;
 	int b;
 	struct point_t* next;
-}point_t;
+} point_t;
+
+typedef struct labyrinth {
+    point_t* rooms;
+    size_t width;
+    size_t heigth;
+} labyrinth;
 
 void list_add_front(point_t** list, int r, int b, int set);
 void list_add_back(point_t** list, int r, int b, int set);
