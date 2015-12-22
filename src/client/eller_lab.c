@@ -1,5 +1,5 @@
-#include "eller_lab.h"
-#include "list_funcs.h"
+#include "../include/eller_lab.h"
+#include "../include/list_funcs.h"
 #include <time.h>
 #include <stdlib.h>
 #include <assert.h>

@@ -1,7 +1,7 @@
-#include <stdio.h>
-
 #ifndef _LIST_FUNCS_H_
 #define _LIST_FUNCS_H_
+
+#include <stdio.h>
 
 typedef unsigned long size_t;
 

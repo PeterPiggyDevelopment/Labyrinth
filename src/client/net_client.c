@@ -7,7 +7,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
-#include "eller_lab.h"
+#include "../include/eller_lab.h"
 
 #define h_addr h_addr_list[0]
 #define BUFFER_LENGTH 1024
