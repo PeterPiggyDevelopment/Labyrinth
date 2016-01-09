@@ -63,5 +63,6 @@ char* serialize (labyrinth* lab){
         }
         strcat(buf, "\n");
     }
-	return buf;
+    for (i = 0; buf[i]!=0; i++) if (buf[i]==-37) buf[i]=' ';
+    return buf;
 }

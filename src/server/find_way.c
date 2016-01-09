@@ -87,7 +87,7 @@ static char find_way(int bX, int bY, int eX, int eY, int lway){
 char* start_finding(char* l){
     char is_way;
     lab = deserialize(l);
-    is_way = find_way(0,0,2,2,0);
+    is_way = find_way(1,1,2,2,0);
     if (is_way) return serialize(lab);
     else return "opan'ki!!!11!";
 }

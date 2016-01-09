@@ -1,11 +1,16 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
  
-import Data.ByteString.Char8 ()
+import Data.ByteString.Char8 (pack,  unpack)
 import System.Exit
 import Network hiding (accept, sClose)
 import Network.Socket hiding (recv)
 import Network.Socket.ByteString (sendAll, recv)
 import Control.Concurrent
+import Foreign.C
+import Foreign.Marshal.Alloc
+
+foreign import ccall start_finding:: CString -> CString
  
 main :: IO a
 main = withSocketsDo $ do --forkIO comandListen
@@ -26,8 +31,10 @@ loop sock = do
    _ <- forkIO $ body conn
    loop sock
    where
-      body c = do
-              line <- recv c 1024;
-              print line
-              sendAll c $ line
-              sClose c
+      body conn = do
+              line <- start_finding <$> (( unpack <$> (recv conn 1024)) >>= (newCString))
+              lint <- pack <$> peekCString line
+              print lint
+              sendAll conn $ lint 
+              free line
+              sClose conn
