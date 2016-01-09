@@ -29,11 +29,11 @@ typedef enum {
 
 labyrinth* lab;
 
-point_t* get_room(int x, int y){
+static point_t* get_room(int x, int y){
     return lab->rooms + (y*lab->width+x);
 }
 
-char is_way(int x, int y, char side){
+static char is_way(int x, int y, char side){
     switch(side){
         case BOTTOM:return get_room(x,y)->b;
         case RIGHT:return get_room(x,y)->r;
@@ -43,17 +43,51 @@ char is_way(int x, int y, char side){
     }
 }
 
-char find_way(int bX, int bY, int eX, int eY, int lway){
+static char find_way(int bX, int bY, int eX, int eY, int lway){
     char result = 0;
     if ((bX == eX)&&(bY == eY)) return 1;
-    else { }
-    return result;
+    else {
+        if (is_way(bX, bY, LEFT) && (get_room(bX - 1, bY )->set == 0)){
+            get_room(bX-1, bY)->set = lway+1;
+            result = find_way(bX-1, bY, eX, eY, lway+1);
+        }
+        if (result) { 
+            get_room(bX, bY)->is_way = 1;
+            return 1; 
+        }
+        if (is_way(bX, bY, RIGHT) && (get_room(bX + 1, bY )->set == 0)){
+            get_room(bX+1, bY)->set = lway+1;
+            result = find_way(bX-1, bY, eX, eY, lway+1);
+        }
+        if (result) { 
+            get_room(bX, bY)->is_way = 1;
+            return 1; 
+        }
+        if (is_way(bX, bY, TOP) && (get_room(bX, bY-1)->set == 0)){
+            get_room(bX, bY-1)->set = lway+1;
+            result = find_way(bX, bY-1, eX, eY, lway+1);
+        }
+        if (result) { 
+            get_room(bX, bY)->is_way = 1;
+            return 1; 
+        }
+        if (is_way(bX, bY, BOTTOM) && (get_room(bX, bY+1)->set == 0)){
+            get_room(bX, bY+1)->set = lway+1;
+            result = find_way(bX, bY+1, eX, eY, lway+1);
+        }
+        if (result) { 
+            get_room(bX, bY)->is_way = 1;
+            return 1; 
+        }
+    }
+    if (!result) get_room(bX, bY)->set = lab->width * lab->height;
+    return 0;
 }
 
-char start_finding(char* l){
+char* start_finding(char* l){
     char is_way;
     lab = deserialize(l);
-    is_way = find_way(2,4,2,5,0);
-    /* return serialize(way); */
-    return is_way;
+    is_way = find_way(0,0,2,2,0);
+    if (is_way) return serialize(lab);
+    else return "opan'ki!!!11!";
 }

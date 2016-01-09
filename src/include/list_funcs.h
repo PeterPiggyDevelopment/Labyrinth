@@ -6,16 +6,17 @@
 typedef unsigned long size_t;
 
 typedef struct point_t {
-	int set;
-	int r;
-	int b;
-	struct point_t* next;
+    int set;
+    int is_way;
+    int r;
+    int b;
+    struct point_t* next;
 } point_t;
 
 typedef struct labyrinth {
     point_t* rooms;
     size_t width;
-    size_t heigth;
+    size_t height;
 } labyrinth;
 
 void list_add_front(point_t** list, int r, int b, int set);

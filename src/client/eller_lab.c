@@ -24,9 +24,10 @@ int rand_int(int n) {
  */
 char* print(point_t* row){
 	char* buf = (char*) calloc(128, 1);
+    char w[2]= { -7 , 0 };
 	for(; row; row = row->next){
 		if (row->b) strcat(buf, " "); else strcat(buf, "_");
-		if (row->r) strcat(buf, " "); else strcat(buf, "|");
+		if (row->r) strcat(buf, w); else strcat(buf, "|");
 	}
 	strcat(buf, "\n");
 	return buf;
