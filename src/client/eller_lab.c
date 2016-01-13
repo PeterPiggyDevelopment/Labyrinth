@@ -49,7 +49,7 @@ point_t* create_row(int n){
  *
  */
 void set_bottom_borders(point_t* row){ 
-	int i, j, k = 0, n = list_count(row);
+	int i, j = 0, k = 0, n = list_count(row);
 	point_t* s = list_point_at(row, 0);
 	for (i = 0; i < n; i++){
 		point_t* cur = list_point_at(row, i);

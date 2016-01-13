@@ -50,14 +50,21 @@ char* get_lab(int width, int height){
 
 int main(int argc, char *argv[])
 {
-	int i = 0, width = 10, height = 10;
-    while(1){
-        char* buf = get_lab(width, height);
-        if (strcmp(buf, "no way")){ 
-            printf("%s\n", buf);
-            sleep(1);
-            for (i = 0; i <= height+1; i++) printf("\033[A\033[2K");
+    if (argc < 2)
+        puts("USAGE: client <labyrinth update time(secs)>.");
+    else if (argc > 2) {
+        puts("USAGE: client <labyrinth update time(secs)>.");
+    }
+    else{
+        int i = 0, width = 10, height = 10;
+        while(1){
+            char* buf = get_lab(width, height);
+            if (strcmp(buf, "no way")){ 
+                printf("%s\n", buf);
+                sleep(atoi(argv[1]));
+                for (i = 0; i <= height+1; i++) printf("\033[A\033[2K");
+            }
         }
     }
-	return 0;
+    return 0;
 }

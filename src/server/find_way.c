@@ -17,6 +17,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 #include "../include/list_funcs.h"
 #include "../include/serialization.h"
 
@@ -89,10 +90,15 @@ static char find_way(int bX, int bY, int eX, int eY, int lway){
 
 char* start_finding(char* l){
     int bX=1, bY=1, eX=10, eY=10;
-    char is_way=1;
+    char is_way=0;
     lab = deserialize(l);
-    serialize(lab);
-    is_way = find_way(bX,bY,eX,eY,0);
+    is_way =   find_way(bX,bY,eX,eY,0);
     if (is_way) return serialize(lab);
-    else return "no way";
+    else {
+        char* buf = serialize(lab),* buf2 = calloc(2000, 1);
+        memcpy(buf2, buf, strlen(buf)/2-5);
+        strcat(buf2, "!!NO WAY!!");
+        memcpy(buf2 + (strlen(buf)/2+5), buf+(strlen(buf)/2+5), strlen(buf)/2);
+        return buf2;
+    }
 }
