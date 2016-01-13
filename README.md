@@ -1,6 +1,6 @@
 # Labyrinth
 ## Introduction 
-This is a **Kirill Yarcev**'s System Programming Languages project. It writen only to pass the exam. No politics, no snots, no quotes, no long reflections. 
+This is a **Kirill Yartsev**'s System Programming Languages project. It writen only to pass the exam. No politics, no snots, no quotes, no long reflections. 
 
 ## Overview
 This project is consists of two parts. The first part is a client which generates random labyrinth and sends it to the server. 
