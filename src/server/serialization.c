@@ -64,7 +64,7 @@ char* serialize (labyrinth* lab){
                 if (cur->is_way) strcat(buf, "&");
                 else strcat(buf, " "); 
             }
-            else if (cur->is_way) strcat(buf, "&");
+            else if (cur->is_way) strcat(buf, "\033[4m&\033[24m");
                 else strcat(buf, "_");
             if (cur->r) strcat(buf, " "); else strcat(buf, "|");
         }
