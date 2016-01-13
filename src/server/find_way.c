@@ -94,9 +94,5 @@ char* start_finding(char* l){
     serialize(lab);
     is_way = find_way(bX,bY,eX,eY,0);
     if (is_way) return serialize(lab);
-    else {
-        char* s = malloc(255);
-        sprintf(s, "There is no way from point %d %d to %d %d!", bX, bY, eX, eY);
-        return s;
-    }
+    else return "no way";
 }

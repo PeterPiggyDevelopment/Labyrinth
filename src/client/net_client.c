@@ -26,18 +26,15 @@ int connect_to_server(char* hostname, int portno, char* errcode){
 	return sockfd;
 }
 
-int main(int argc, char *argv[])
-{
-	int port = 5002;
-	char* host = "localhost", *buf, errcode;
-	int sockfd = connect_to_server(host, port, &errcode);
+char* get_lab(int width, int height){
+	char* host = "localhost", errcode, *buf;
+	int port = 5002, sockfd = connect_to_server(host, port, &errcode);
 	switch(errcode){
 		case 1: fprintf(stderr, "ERROR opening socket"); exit(errcode);
 		case 2: fprintf(stderr, "ERROR, no such host\n"); exit(errcode);
 		case 3: fprintf(stderr, "ERROR connecting"); exit(errcode);
 	}
-	printf("You connected to %s:%d\n", host, port);
-	buf = create_labyrinth(10,10);
+	buf = create_labyrinth(width, height);
 	if (write(sockfd, buf, strlen(buf)) < 0) { 
 		fprintf(stderr, "ERROR writing to socket"); 
 		exit(1); 
@@ -47,7 +44,20 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "ERROR reading from socket");
 		exit(1);
 	}
-	printf("%s\n", buf);
 	close(sockfd);
+    return buf;
+}
+
+int main(int argc, char *argv[])
+{
+	int i = 0, width = 10, height = 10;
+    while(1){
+        char* buf = get_lab(width, height);
+        if (strcmp(buf, "no way")){ 
+            printf("%s\n", buf);
+            sleep(1);
+            for (i = 0; i <= height+1; i++) printf("\033[A\033[2K");
+        }
+    }
 	return 0;
 }
