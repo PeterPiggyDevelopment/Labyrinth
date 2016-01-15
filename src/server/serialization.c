@@ -20,7 +20,7 @@
 #include "../include/list_funcs.h"
 #include "../include/serialization.h"
 
-labyrinth* deserialize (char* lab){
+labyrinth* deserialize (const char * const lab){
     labyrinth* l= (labyrinth*)calloc(sizeof(labyrinth), 1);
     size_t k = 0, s = 0, i;
     char j = 1;
@@ -54,7 +54,7 @@ labyrinth* deserialize (char* lab){
     return l;
 }
 
-char* serialize (labyrinth* lab){
+char* serialize (const labyrinth* const lab){
     char* buf = (char*) calloc(1024, 1);
     size_t i, j;
     for (i = 0; i< lab->height; ++i){ 

@@ -2,6 +2,6 @@
 #define _SERIALIZE_
 #include "list_funcs.h"
 
-char* serialize (labyrinth* way);
-labyrinth* deserialize (char* lab);
+char* serialize (const labyrinth* const way);
+labyrinth* deserialize (const char* const lab);
 #endif
